@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Information</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            overflow: hidden;
+        }
+
+        .scrollable-container {
+            height: 80vh; 
+            overflow-y: auto; 
+        }
+
+        .dog-card-container {
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 20px; 
+            justify-content: space-between;
+        }
+
+        .dog-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            flex: 1; 
+            box-sizing: border-box; 
+            min-width: calc(33.33% - 20px);
+            max-width: calc(50% - 20px);
+        }
+
+        .dog-image {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer; 
+        }
+
+        
+        .popup-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: 1000;
+        }
+
+        
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f5f5f5; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001; 
+            width: 50%;
+            height: 80vh;
+            border-radius: 10px; 
+        }
+
+       
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        
+        .dog-details {
+            padding: 10px;
+            background-color: #fff; 
+            border-radius: 5px; 
+        }
+
+        .description {
+            font-size: 16px; 
+            line-height: 1.5;
+        }
+
+        
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff; 
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Dogs</h1>
+    <div class="scrollable-container">
+        <div class="dog-card-container">
+            <div class="dog-card">
+                <img class="dog-image" src="labrador.jpeg" alt="Dog 1" onclick="showPopup('Labrador', '30 kg', 'Up to date', 'This is a beautiful Labrador. It is known for its friendly and intelligent nature. Golden Retrievers make excellent family pets and are great with children.');">
+                <h2>Breed: Labrador</h2>
+                <p>Weight: 30 kg</p>
+                <p>Vaccine Status: Up to date</p>
+            </div>
+            
+            <div class="dog-card">
+                <img class="dog-image" src="german shepherd.jpeg" alt="Dog 2" onclick="showPopup('German Shepherd', '22 kg', 'Not vaccinated', 'The German Shepherd one of the most popular dog breeds in the United States. Labradors are known for their friendly and outgoing nature.');">
+                <h2>Breed: German Shepherd</h2>
+                <p>Weight: 28 kg</p>
+                <p>Vaccine Status: Not vaccinated</p>
+            </div>
+            <div class="dog-card">
+              <img class="dog-image" src="shih tzu.jpeg" alt="Dog 3" onclick="showPopup('Shih Tzu', '5 kg', 'Not vaccinated', 'Shih Tzu is one of the most popular dog breeds in the United States. Labradors are known for their friendly and outgoing nature.');">
+              <h2>Breed: Shih Tzu</h2>
+              <p>Weight: 28 kg</p>
+              <p>Vaccine Status: Not vaccinated</p>
+          </div>
+          <div class="dog-card">
+            <img class="dog-image" src="Rottweiler-dog.webp" alt="Dog 4" onclick="showPopup('Rottweiler', '38 kg', 'Not vaccinated', );">
+            <h2>Breed: Rottweiler</h2>
+            <p>Weight: 28 kg</p>
+            <p>Vaccine Status: Not vaccinated</p>
+        </div>
+        <div class="dog-card">
+          <img class="dog-image" src="Pomeranian-Puppy.webp" alt="Dog 5" onclick="showPopup('Pomeranian', '2.8 kg', 'Not vaccinated', );">
+          <h2>Breed: Pomeranian</h2>
+          <p>Weight: 28 kg</p>
+          <p>Vaccine Status: Not vaccinated</p>
+      </div>
+      <div class="dog-card">
+        <img class="dog-image" src="husky.jpeg" alt="Dog 6" onclick="showPopup('Husky', '21 kg', 'up to date', );">
+        <h2>Breed: Husky</h2>
+        <p>Weight: 28 kg</p>
+        <p>Vaccine Status: Not vaccinated</p>
+    </div>
+            
+            <div class="dog-card">
+                <img class="dog-image" src="chow chow.jpeg" alt="Dog 7" onclick="showPopup('Chow Chow', '22 kg', 'Partially vaccinated', );">
+                <h2>Breed: Chow Chow</h2>
+                <p>Weight: 35 kg</p>
+                <p>Vaccine Status: Partially vaccinated</p>
+            </div>
+            <div class="dog-card">
+                <img class="dog-image" src="chow chow.jpeg" alt="Dog 8" onclick="showPopup('Chow Chow', '23 kg', 'Partially vaccinated', );">
+                <h2>Breed: Chow Chow</h2>
+                <p>Weight: 35 kg</p>
+                <p>Vaccine Status: Partially vaccinated</p>
+            </div>
+            <div class="dog-card">
+                <img class="dog-image" src="chow chow.jpeg" alt="Dog 9" onclick="showPopup('Chow Chow', '25 kg', 'Partially vaccinated', );">
+                <h2>Breed: Chow Chow</h2>
+                <p>Weight: 35 kg</p>
+                <p>Vaccine Status: Partially vaccinated</p>
+            </div>
+
+            
+        </div>
+    </div>
+
+    
+    <div class="popup-background" id="backgroundOverlay"></div>
+
+    
+    <div class="popup-container" id="dogPopup">
+        <span class="close-icon" onclick="closePopup()">&times;</span>
+        <div class="dog-details">
+            <h2>Dog Details</h2>
+            <p>Breed: <span id="popupBreed"></span></p>
+            <p>Weight: <span id="popupWeight"></span></p>
+            <p>Vaccine Status: <span id="popupStatus"></span></p>
+            <p class="description" id="popupDescription"></p>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="buyDog()">Buy</button>
+            <button class="button" onclick="sellDog()">Sell</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(breed, weight, status, description) {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('dogPopup');
+            const breedSpan = document.getElementById('popupBreed');
+            const weightSpan = document.getElementById('popupWeight');
+            const statusSpan = document.getElementById('popupStatus');
+            const descriptionSpan = document.getElementById('popupDescription');
+
+            breedSpan.textContent = breed;
+            weightSpan.textContent = weight;
+            statusSpan.textContent = status;
+            descriptionSpan.textContent = description;
+
+           
+            backgroundOverlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('dogPopup');
+
+           
+            backgroundOverlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        function buyDog() {
+            
+            alert('You clicked Buy!');
+        }
+
+        function sellDog() {
+            
+            alert('You clicked Sell!');
+        }
+    </script>
+</body>
+</html>

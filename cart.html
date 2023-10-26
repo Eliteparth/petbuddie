@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>your new famiky member</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .cart-item img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+    </header>
+    <div class="cart-container">
+        <h2>Your Cart</h2>
+        <div class="cart-item">
+            <img src="cockatiel.jpeg" alt="Product 1">
+            <div>
+                <h3>Product 1</h3>
+                <p>Price: 19.99</p>
+                <p>Quantity: 2</p>
+                <button onclick="removeItem(1)">Remove</button>
+            </div>
+        </div>
+        <div class="cart-item">
+            <img src="beagle.jpeg" alt="Product 2">
+            <div>
+                <h3>Product 2</h3>
+                <p>Price: 29.99</p>
+                <p>Quantity: 1</p>
+                <button onclick="removeItem(2)">Remove</button>
+            </div>
+        </div>
+        <div class="cart-total">
+            Total: 60.97
+        </div>
+    </div>
+
+    <script>
+       
+        function removeItem(productId) {
+            
+            alert("Item removed from the cart.");
+           
+        }
+    </script>
+</body>
+</html>

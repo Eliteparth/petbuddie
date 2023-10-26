@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Information</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            overflow: hidden; 
+        }
+
+        .scrollable-container {
+            height: 80vh; 
+            overflow-y: auto; 
+        }
+
+        .cat-card-container {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            justify-content: space-between; 
+        }
+
+        .cat-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            flex: 1;
+            box-sizing: border-box; 
+            min-width: calc(33.33% - 20px);
+            max-width: calc(50% - 20px); 
+        }
+
+        .cat-image {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer; 
+        }
+
+        
+        .popup-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: 1000;
+        }
+
+        
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f5f5f5; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001; 
+            width: 50%;
+            height: 80vh;
+            border-radius: 10px; 
+        }
+
+       
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333; 
+        }
+
+        
+        .dog-details {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px; 
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.5; 
+        }
+
+        
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff; 
+            color: #fff; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Cats</h1>
+    <div class="scrollable-container">
+        <div class="cat-card-container">
+            <div class="cat-card">
+                <img class="cat-image" src="persian cat'.jpg" alt="cat 1" onclick="showPopup('Persian Cat', '30 kg', 'Up to date', 'This is a beautiful Persian cat. It is known for its friendly and intelligent nature. Persian cat make excellent family pets and are great with children.');">
+                <h2>Breed: Persian Cat</h2>
+                <p>Weight: 3.5 kg</p>
+                <p>Vaccine Status: Up to date</p>
+            </div>
+            
+            <div class="cat-card">
+                <img class="cat-image" src="bombay cat.jpg" alt="cat 2" onclick="showPopup('Bombay Cat', '28 kg', 'not vaccinated', );">
+                <h2>Breed: Bombay Cat</h2>
+                <p>Weight: 5.8 kg</p>
+                <p>Vaccine Status: Not vaccinated</p>
+            </div>
+            <div class="cat-card">
+              <img class="cat-image" src="american-shorthair-.jpg" alt="cat 3" onclick="showPopup('American-Shorthair', '28 kg', 'Not vaccinated', );">
+              <h2>Breed: American-Shorthair</h2>
+              <p>Weight: 4.2kg</p>
+              <p>Vaccine Status: Not vaccinated</p>
+          </div>
+          <div class="cat-card">
+            <img class="cat-image" src="Himalyan cat.jpg" alt="cat 4" onclick="showPopup('Himalyan Cat', '28 kg', 'Not vaccinated', );">
+            <h2>Breed: Himalyan Cat</h2>
+            <p>Weight: 28 kg</p>
+            <p>Vaccine Status: Not vaccinated</p>
+        </div>
+        <div class="cat-card">
+          <img class="cat-image" src="somali cat.webp" alt="cat 5" onclick="showPopup('Somali Cat', '28 kg', 'Not vaccinated', );">
+          <h2>Breed: Somali cat</h2>
+          <p>Weight: 28 kg</p>
+          <p>Vaccine Status: Not vaccinated</p>
+      </div>
+      <div class="cat-card">
+        <img class="cat-image" src="american bobtail.jpg" alt="cat 6" onclick="showPopup('American-bobtail', '28 kg', 'Not vaccinated', );">
+        <h2>Breed: American bobtail</h2>
+        <p>Weight: 28 kg</p>
+        <p>Vaccine Status: Not vaccinated</p>
+    </div>
+            
+            
+            
+        </div>
+    </div>
+
+   
+    <div class="popup-background" id="backgroundOverlay"></div>
+
+   
+    <div class="popup-container" id="catPopup">
+        <span class="close-icon" onclick="closePopup()">&times;</span>
+        <div class="cat-details">
+            <h2>Cat Details</h2>
+            <p>Breed: <span id="popupBreed"></span></p>
+            <p>Weight: <span id="popupWeight"></span></p>
+            <p>Vaccine Status: <span id="popupStatus"></span></p>
+            <p class="description" id="popupDescription"></p>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="buycat()">Buy</button>
+            <button class="button" onclick="sellcat()">Sell</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(breed, weight, status, description) {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('catPopup');
+            const breedSpan = document.getElementById('popupBreed');
+            const weightSpan = document.getElementById('popupWeight');
+            const statusSpan = document.getElementById('popupStatus');
+            const descriptionSpan = document.getElementById('popupDescription');
+
+            breedSpan.textContent = breed;
+            weightSpan.textContent = weight;
+            statusSpan.textContent = status;
+            descriptionSpan.textContent = description;
+
+            
+            backgroundOverlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('dogPopup');
+
+            
+            backgroundOverlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        function buycat() {
+            
+            alert('You clicked Buy!');
+        }
+
+        function sellcat() {
+                            
+            alert('You clicked Sell!');
+        }
+    </script>
+</body>
+</html>

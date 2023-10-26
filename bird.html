@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>birds Information</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            overflow: hidden; 
+        }
+
+        .scrollable-container {
+            height: 80vh; 
+            overflow-y: auto; 
+        }
+
+        .birds-card-container {
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            justify-content: space-between; 
+        }
+
+        .birds-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            flex: 1;
+            box-sizing: border-box; 
+            min-width: calc(33.33% - 20px);
+            max-width: calc(50% - 20px); 
+        }
+
+        .birds-image {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer; 
+        }
+
+        
+        .popup-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: 1000;
+        }
+
+        
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f5f5f5; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001; 
+            width: 50%;
+            height: 80vh;
+            border-radius: 10px; 
+        }
+
+       
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333; 
+        }
+
+        
+        .birds-details {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px; 
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.5; 
+        }
+
+        
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff; 
+            color: #fff; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of birds</h1>
+    <div class="scrollable-container">
+        <div class="birds-card-container">
+            <div class="birds-card">
+                <img class="birds-image" src="cockatiel.jpeg" alt="birds 1" onclick="showPopup('cockatiel', );">
+                <h2>Breed: Cockatiel</h2>
+                
+            </div>
+            
+            <div class="birds-card"> 
+                <img class="birds-image" src="Lovebirds.jpg" alt="birds 2" onclick="showPopup('Lovebirds',);">
+                <h2>Breed: Love birds</h2>
+                
+            </div>
+            <div class="birds-card">
+              <img class="birds-image" src="White-Pigeon.png" alt="birds3" onclick="showPopup('white pigeon',  );">
+              <h2>Breed: white pigeon</h2>
+             
+          </div>
+          <div class="birds-card">
+            <img class="birds-image" src="parrot.jpeg" alt="birds 4" onclick="showPopup('Parrot',  );">
+            <h2>Breed: Parrot</h2>
+           
+        </div>
+        <div class="birds-card">
+          <img class="birds-image" src="scarlet macaw.jpeg" alt="birds 5" onclick="showPopup('Scarlet Macaw',  );">
+          <h2>Breed: Scarlet macaw</h2>
+         
+      </div>
+      <div class="birds-card">
+        <img class="birds-image" src="parakeet.jpeg" alt="birds 6" onclick="showPopup('parrot',  );">
+        <h2>Breed: parakeet</h2>
+       
+    </div>
+            
+            <div class="birds-card">
+                <img class="birds-image" src="cockatoo.jpeg" alt="birds 7" onclick="showPopup('parrot', );">
+                <h2>Breed: cockatoo</h2>
+                
+            </div>
+
+            
+        </div>
+    </div>
+
+   
+    <div class="popup-background" id="backgroundOverlay"></div>
+
+   
+    <div class="popup-container" id="birdsPopup">
+        <span class="close-icon" onclick="closePopup()">&times;</span>
+        <div class="birds-details">
+            <h2>birds Details</h2>
+            <p>Breed: <span id="popupBreed"></span></p>
+            <p>Weight: <span id="popupWeight"></span></p>
+            <p>Vaccine Status: <span id="popupStatus"></span></p>
+            <p class="description" id="popupDescription"></p>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="buybirds()">Buy</button>
+            <button class="button" onclick="sellbirds()">Sell</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(breed, weight, status, description) {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('birdsPopup');
+            const breedSpan = document.getElementById('popupBreed');
+            const weightSpan = document.getElementById('popupWeight');
+            const statusSpan = document.getElementById('popupStatus');
+            const descriptionSpan = document.getElementById('popupDescription');
+
+            breedSpan.textContent = breed;
+            weightSpan.textContent = weight;
+            statusSpan.textContent = status;
+            descriptionSpan.textContent = description;
+
+            
+            backgroundOverlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            const backgroundOverlay = document.getElementById('backgroundOverlay');
+            const popup = document.getElementById('birdsPopup');
+
+            
+            backgroundOverlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        function buybirds() {
+            
+            alert('You clicked Buy!');
+        }
+
+        function sellbirds() {
+                            
+            alert('You clicked Sell!');
+        }
+    </script>
+</body>
+</html>
